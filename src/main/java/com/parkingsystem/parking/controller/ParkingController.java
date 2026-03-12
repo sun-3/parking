@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import static com.parkingsystem.parking.utils.EndPoints.EXIT;
+import static com.parkingsystem.parking.utils.EndPoints.PARKING;
+
 /**
  *  @author Sunny Ansal
  *
@@ -20,12 +23,12 @@ public class ParkingController {
     @Autowired
     private ParkingService parkingService;
 
-    @PostMapping("/park")
+    @PostMapping(PARKING)
     public String parkVehicle(@RequestParam String vehicleNumber, @RequestParam VehicleType vehicleType){
         return parkingService.parkVehicle(vehicleNumber,vehicleType);
     }
 
-    @PostMapping("/exit")
+    @PostMapping(EXIT)
     public double exitVehicle(@RequestParam Long ticketId){
 
         return parkingService.exitParking(ticketId);
