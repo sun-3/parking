@@ -35,4 +35,6 @@ public class Ticket {
     private String vehicleNumber;
 
     private double price;
+
+    private Long floorNumber;
 }

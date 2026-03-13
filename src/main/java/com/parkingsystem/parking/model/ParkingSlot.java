@@ -28,4 +28,8 @@ public class ParkingSlot {
     private VehicleType vehicleType;
 
     private String vehicleNumber;
+
+    @ManyToOne
+    @JoinColumn(name = "floor_id")
+    private ParkingFloor floor;
 }

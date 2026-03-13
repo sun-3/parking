@@ -27,7 +27,7 @@ public class ParkingServiceImpl implements ParkingService {
 
     @Override
     public String parkVehicle(String vehicleNumber, VehicleType vehicleType) {
-        ParkingSlot parkingSlot = parkingSlotRepository.findFirstByVehicleTypeAndOccupiedFalse(vehicleType.name())
+        ParkingSlot parkingSlot = parkingSlotRepository.findFirstByVehicleTypeAndOccupiedFalse(VehicleType.valueOf(vehicleType.name()))
                                                         .orElseThrow(()-> new RuntimeException("No slots available"));
 
         parkingSlot.setOccupied(true);
@@ -55,7 +55,8 @@ public class ParkingServiceImpl implements ParkingService {
         ticket.setPrice(price);
         ticketRepository.save(ticket);
 
-        ParkingSlot parkingSlot = parkingSlotRepository.findById(ticket.getSlotId()).orElseThrow();
+        ParkingSlot parkingSlot = parkingSlotRepository.findById(ticket.getSlotId()).orElseThrow(() ->
+                new RuntimeException("no slot available"));
 
         parkingSlot.setOccupied(false);
         parkingSlot.setVehicleNumber(null);
